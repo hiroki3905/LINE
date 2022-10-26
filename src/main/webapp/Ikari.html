@@ -39,7 +39,27 @@
     let members = [];
         /* ドロップダウンメニューを動的に増やす */
 
+    function e(num){
+      const index = select[0].selectedIndex;
+      console.log(index);
+      let table = $("table")[0];
+      members[index].powers.forEach(elm => {
+        /*let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        td.innerHTML = elm;
+        tr.appendChild(td);
+        table.appendChild(tr);*/
+        let row = table.insertRow();
+        let col = row.insertCell();
+        col.innerHTML = table.rows.length - 1;
+        let col2 = row.insertCell();
+        col2.innerHTML = elm;
+      })
+    }
+
+
     const select = $('#drop');
+    select[0].onchange = e;
 
 
     /* 指定したURLから要素を取り出す */
@@ -50,10 +70,13 @@
         data.members.forEach(element => {
           let op = document.createElement('option');
           op.text = element.name;
+          op.value = select[0].length;
           select[0].appendChild(op);
           members.push(element);
+          op.onselect = e;
         });
         txt.text(data.homeTown);
+        select[0].innerHTML += "<option value=" + select[0].length + " > NULL </option>";
       });  //テキスト要素を変えるときは
   
     /* ボタンを取得して、中に書いてある値と高さを変更 */
@@ -61,13 +84,6 @@
     const button = bt[0];
     button.value = "hello"; 
     bt.innerHeight(100);    
-
-    let op1 = document.createElement("option");
-    op1.text = "number1";
-    op1.value = 1;
-        
-    select[0].appendChild(op1);
-    select[0].innerHTML += "<option value=\"2\"> number2 </option>";
 
   </script>
 </body>
