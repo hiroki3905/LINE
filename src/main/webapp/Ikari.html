@@ -5,23 +5,42 @@
 <title>json</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+
+
+
 <body>
-  <input type="button" value="あばば" name="ばぼぼ" id="hoge"/>
-  <div id="text">te</div>
-  <select id="drop">
-    <option> asd </option>
-  </select>
+  <style>
+
+    div{
+      display: flex;
+      width: auto;
+    }
+
+  </style>
+  <!-- spanの項目2つは横並びになる -->
+  <div>
+  <span>
+    <input type="button" value="あばば" name="ばぼぼ" id="hoge">
+    <div id="text">te</div>
+    <select id="drop"></select>
+  </span>
+
+  <span>
+    <table border="1">
+      <th> number </th>
+      <th> power </th>
+      <tr><td>1</td></tr>
+      <tr><td>2</td></tr>
+    </table>
+  </span>
+  </div>
   <script>
     const txt = $('#text');   //id=textの要素を取り出し
-
+    let members = [];
         /* ドロップダウンメニューを動的に増やす */
-    let op1 = document.createElement("option");
-    op1.text = "number1";
-    op1.value = 1;
+
     const select = $('#drop');
-    
-    select[0].appendChild(op1);
-    select[0].innerHTML += "<option value=\"2\"> number2 </option>";
+
 
     /* 指定したURLから要素を取り出す */
     fetch('https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json')
@@ -32,6 +51,7 @@
           let op = document.createElement('option');
           op.text = element.name;
           select[0].appendChild(op);
+          members.push(element);
         });
         txt.text(data.homeTown);
       });  //テキスト要素を変えるときは
@@ -41,6 +61,13 @@
     const button = bt[0];
     button.value = "hello"; 
     bt.innerHeight(100);    
+
+    let op1 = document.createElement("option");
+    op1.text = "number1";
+    op1.value = 1;
+        
+    select[0].appendChild(op1);
+    select[0].innerHTML += "<option value=\"2\"> number2 </option>";
 
   </script>
 </body>
