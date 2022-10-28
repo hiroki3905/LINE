@@ -20,7 +20,14 @@ public class Fujii {
 
 	
 	public static void main(String args[]) throws Exception{
-		String q = "title=\"プログラミング\"";
+		//////////////////////////////////////
+		String serch = "プログラミング"; //検索ワード
+		int num = 10;                    //結果を何個表示するか
+		String tag = "dcterms:title";    //表示するタグ
+		/////////////////////////////////////////
+		
+		
+		String q = "title=\""+ serch + "\"";
         URL urlToEncode = new URL("https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&recordPacking=xml&recordSchema=dcndl&query=" + q);
 
         try {
@@ -32,10 +39,8 @@ public class Fujii {
                     urlToEncode.getQuery(), urlToEncode.getRef());
 
             String finalEncodedUrl = uri.toASCIIString();
-            System.out.println("Encoded Url: " + finalEncodedUrl);
             List<String> sample_list = new ArrayList<String>();
-    		String tag = "dcterms:title";
-    		System.out.println(getXMLContents(10,sample_list,tag,finalEncodedUrl));
+    		System.out.println(getXMLContents(num,sample_list,tag,finalEncodedUrl));
 
         } catch (URISyntaxException e) {
             e.printStackTrace();
