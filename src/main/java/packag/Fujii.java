@@ -1,6 +1,10 @@
 package packag;
 
 import java.io.IOException;
+import java.net.IDN;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +20,27 @@ public class Fujii {
 
 	
 	public static void main(String args[]) throws Exception{
-		List<String> sample_list = new ArrayList<String>();
-		String url = "https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&recordPacking=xml&recordSchema=dcndl";
-		String serch = "%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0";
-		String tag = "dcterms:title";
-		System.out.println(getXMLContents(10,sample_list,tag,addserchquery(url,serch)));
+		String q = "title=\"プログラミング\"";
+        URL urlToEncode = new URL("https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&recordPacking=xml&recordSchema=dcndl&query=" + q);
+
+        try {
+            URI uri = new URI(urlToEncode.getProtocol(),
+                    urlToEncode.getUserInfo(),
+                    IDN.toASCII(urlToEncode.getHost()),
+                    urlToEncode.getPort(),
+                    urlToEncode.getPath(),
+                    urlToEncode.getQuery(), urlToEncode.getRef());
+
+            String finalEncodedUrl = uri.toASCIIString();
+            System.out.println("Encoded Url: " + finalEncodedUrl);
+            List<String> sample_list = new ArrayList<String>();
+    		String tag = "dcterms:title";
+    		System.out.println(getXMLContents(10,sample_list,tag,finalEncodedUrl));
+
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        
 	}
     
  
@@ -44,9 +64,5 @@ public class Fujii {
             }
             return p;
   
-    }
-    //検索したい本の名前を受け取ってurlにクエリとして追加
-    public static String  addserchquery(String url,String query) {
-    	return url + "&query=title%3d%22" +query+ "%22";
     }
 }
