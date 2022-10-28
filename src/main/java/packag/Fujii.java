@@ -24,10 +24,10 @@ public class Fujii {
 		String serch = "プログラミング"; //検索ワード
 		int num = 10;                    //結果を何個表示するか
 		String tag = "dcterms:title";    //表示するタグ
+		String year = "2018";
 		/////////////////////////////////////////
 		
-		
-		String q = "title=\""+ serch + "\"";
+		String q = "title=\""+ serch + "\""+" AND from="+year+"\"";
         URL urlToEncode = new URL("https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&recordPacking=xml&recordSchema=dcndl&query=" + q);
 
         try {
