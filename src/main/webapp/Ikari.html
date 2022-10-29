@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>json</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+
+
+<body>
+  <style>
+
+    div{
+      display: flex;
+      width: auto;
+    }
+
+  </style>
+  <!-- spanの項目2つは横並びになる -->
+  <div>
+  <span>
+    <input type="button" value="あばば" name="ばぼぼ" id="hoge">
+    <div id="text">te</div>
+    <select id="drop"></select>
+  </span>
+
+  <span>
+    <table border="1">
+      <th> number </th>
+      <th> power </th>
+      <tr><td>1</td></tr>
+      <tr><td>2</td></tr>
+    </table>
+  </span>
+  </div>
+  <script>
+    const txt = $('#text');   //id=textの要素を取り出し
+    let members = [];
+        /* ドロップダウンメニューを動的に増やす */
+
+    function e(num){
+      const index = select[0].selectedIndex;
+      console.log(index);
+      let table = $("table")[0];
+      members[index].powers.forEach(elm => {
+        /*let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        td.innerHTML = elm;
+        tr.appendChild(td);
+        table.appendChild(tr);*/
+        let row = table.insertRow();
+        let col = row.insertCell();
+        col.innerHTML = table.rows.length - 1;
+        let col2 = row.insertCell();
+        col2.innerHTML = elm;
+      })
+    }
+
+
+    const select = $('#drop');
+    select[0].onchange = e;
+
+
+    /* 指定したURLから要素を取り出す */
+    fetch('https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json')
+      .then((response) => response.json())    //html要素の中から、json形式で取り出す
+      .then((data) => {
+        
+        data.members.forEach(element => {
+          let op = document.createElement('option');
+          op.text = element.name;
+          op.value = select[0].length;
+          select[0].appendChild(op);
+          members.push(element);
+          op.onselect = e;
+        });
+        txt.text(data.homeTown);
+        select[0].innerHTML += "<option value=" + select[0].length + " > NULL </option>";
+      });  //テキスト要素を変えるときは
+  
+    /* ボタンを取得して、中に書いてある値と高さを変更 */
+    const bt = $("#hoge");
+    const button = bt[0];
+    button.value = "hello"; 
+    bt.innerHeight(100);    
+
+  </script>
+</body>
+</html>
