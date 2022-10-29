@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ikari </title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <input type="button" value="あばば" name="ばぼぼ" id="hoge"/>
+  <div id="text">te</div>
+  <select id="drop">
+    <option> asd </option>
+  </select>
+  <script>
+  	
+    const txt = $('#text');   //id=textの要素を取り出し
+
+        /* ドロップダウンメニューを動的に増やす */
+    let op1 = document.createElement("option");
+    op1.text = "number1";
+    op1.value = 1;
+    const select = $('#drop');
+    
+    select[0].appendChild(op1);
+    select[0].innerHTML += "<option value=\"2\"> number2 </option>";
+
+    /* 指定したURLから要素を取り出す */
+    fetch('https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json')
+      .then((response) => response.json())    //html要素の中から、json形式で取り出す
+      .then((data) => {
+        
+        data.members.forEach(element => {
+          let op = document.createElement('option');
+          op.text = element.name;
+          select[0].appendChild(op);
+        });
+        txt.text(data.homeTown);
+      });  //テキスト要素を変えるときは
+  
+    /* ボタンを取得して、中に書いてある値と高さを変更 */
+    const bt = $("#hoge");
+    const button = bt[0];
+    button.value = "hello"; 
+    bt.innerHeight(100);    
+
+  </script>
+</body>
+</html>
