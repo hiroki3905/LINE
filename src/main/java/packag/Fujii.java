@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,7 +22,9 @@ public class Fujii {
 	
 	public static void main(String args[]) throws Exception{
 		//////////////////////////////////////
-		String serch = "プログラミング"; //検索ワード
+		System.out.print("検索する図書名を入力してください:");
+		Scanner scan = new Scanner(System.in);
+		String serch = scan.nextLine();
 		int num = 10;                    //結果を何個表示するか
 		String tag = "dcterms:title";    //表示するタグ
 		String year = "2018";
