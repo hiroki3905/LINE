@@ -14,6 +14,6 @@ public class Main {
 		Fetch amazon = new AmazonSample();
 		System.out.println("\n-----------Amazonの本一覧-----------\n\n");
 		amazon.getTitles("ミランクンデラ").forEach((e) -> System.out.println(e));
-		
+		amazon.view_sample();
 	}
 }
