@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 
 public class Fujii {
 
-	public String URLencode(int num,String serch,String tag,String year) throws SAXException, IOException, ParserConfigurationException, URISyntaxException{
+	public String URLencode(int num,String serch,String year) throws SAXException, IOException, ParserConfigurationException, URISyntaxException{
 		
 		final String liblary_url = "https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&recordPacking=xml&recordSchema=dcndl&query=";
 		

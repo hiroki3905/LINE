@@ -1,7 +1,7 @@
 package packag;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,15 +28,29 @@ import org.xml.sax.SAXException;
 
 
 public class GetXMLContents{
-	public List<String> getXMLContents(int i,List<String> p,String tag,String url) throws SAXException, IOException, ParserConfigurationException{
+	public ArrayList<ArrayList<String>> getXMLContents(int i,ArrayList<ArrayList<String>> p,String url) throws SAXException, IOException, ParserConfigurationException{
 
 		Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(url);
-		Element rootElement = document.getDocumentElement();
-		NodeList nodeList = rootElement.getElementsByTagName(tag);
+		Element rootElement1 = document.getDocumentElement();
+		Element rootElement2 = document.getDocumentElement();
+		Element rootElement3 = document.getDocumentElement();
+
+		NodeList nodeList1 = rootElement1.getElementsByTagName("dcterms:title");
+		NodeList nodeList2 = rootElement1.getElementsByTagName("dc:creator");
+		NodeList nodeList3 = rootElement1.getElementsByTagName("dcndl:publicationName");
 
 		for(int x = 0;x < i;x++) {
-			Element elem = (Element)nodeList.item(x);
-			p.add(elem.getFirstChild().getNodeValue());
+			Element elem1 = (Element)nodeList1.item(x);
+			Element elem2 = (Element)nodeList2.item(x);
+			Element elem3 = (Element)nodeList3.item(x);
+			ArrayList<String> list;
+			list = new ArrayList<String>();
+			list.add(elem1.getFirstChild().getNodeValue());
+			list.add(elem2.getFirstChild().getNodeValue());
+			list.add(elem3.getFirstChild().getNodeValue());
+
+			p.add(list);
+
 		}
 		return p;
 
