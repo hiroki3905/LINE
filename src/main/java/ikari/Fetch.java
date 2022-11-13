@@ -1,5 +1,6 @@
 package ikari;
 
+import java.io.IOException;
 import java.util.List;
 /**
  * スクレイピングを行う関数を定義するインタフェース
@@ -17,5 +18,5 @@ public interface Fetch {
 	/**
 	 * それぞれの動きのサンプルをコンソールに出力
 	 */
-	public void view_sample();
+	public void view_sample() throws IOException;
 }
