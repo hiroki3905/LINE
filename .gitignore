@@ -60,3 +60,4 @@ local.properties
 #.project
 /build/
 /doc/
+.classpath
